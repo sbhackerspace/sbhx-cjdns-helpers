@@ -13,7 +13,7 @@ if len(sys.argv) < 4:
 
 remote_host_port, password, public_key = sys.argv[1:4]
 
-CJDROUTE_CONF = '../../cjdroute2.conf'
+CJDROUTE_CONF = '../../cjdroute.conf'
 
 f = open(CJDROUTE_CONF, 'r')
 conf = f.read()
