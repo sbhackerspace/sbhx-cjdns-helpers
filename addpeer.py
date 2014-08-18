@@ -3,19 +3,17 @@
 import re
 import sys
 
-USAGE = """Usage: ./cjdns/python/contrib/%s remote_host_port password public_key
+USAGE = """Usage: ./addpeer.py path/to/cjdroute.conf remote_host_port password public_key
 
-e.g., %s 123.123.123.123:4321 rgzvtkfmv1qv9k3f4ls3zr2hxx7w1v1 r3791g2tdn22bg8cu3c622ubfvmut75d3dzdxms71hw4fn9m0t3z.k""" % (sys.argv[0], sys.argv[0])
+e.g., ./addpeer.py cjdroute.conf 123.123.123.123:4321 rgzvtkfmv1qv9k3f4ls3zr2hxx7w1v1 r3791g2tdn22bg8cu3c622ubfvmut75d3dzdxms71hw4fn9m0t3z.k"""
 
-if len(sys.argv) < 4:
+if len(sys.argv) < 5:
     print USAGE
     sys.exit(1)
 
-remote_host_port, password, public_key = sys.argv[1:4]
+cjdroute_conf, remote_host_port, password, public_key = sys.argv[1:5]
 
-CJDROUTE_CONF = '../../cjdroute.conf'
-
-f = open(CJDROUTE_CONF, 'r')
+f = open(cjdroute_conf, 'r')
 conf = f.read()
 f.close()
 
@@ -28,6 +26,6 @@ new_connect_to = connect_to + '''"%s": {
                 ''' % (remote_host_port, password, public_key)
 conf = conf.replace(connect_to, new_connect_to, 1)
 
-f = open(CJDROUTE_CONF, 'w')
+f = open(cjdroute_conf, 'w')
 f.write(conf)
 f.close()
